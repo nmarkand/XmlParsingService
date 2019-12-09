@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.NodeList;
 
-
 public class ServiceUtilTest {
 
 	private static final String FILE_NAME = "test.docx";
