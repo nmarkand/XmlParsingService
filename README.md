@@ -50,9 +50,14 @@ Run http://localhost:8080 (I have default port 8080).
 
 Click on button and you will get expected result.  
 
+UserInterface1 - http://localhost:8080
 ![Alt text](/src/test/resources/UserInterface1.jpg?raw=true "UserInterface1")
 
+*****************************************
+UserInterface2 - http://localhost:8080/parseXml/byX2ElementXpath
 ![Alt text](/src/test/resources/UserInterface2.jpg?raw=true "UserInterface2")
+
+*****************************************
 
 ## TESTING - 
 
