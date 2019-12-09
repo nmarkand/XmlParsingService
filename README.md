@@ -50,6 +50,10 @@ Run http://localhost:8080 (I have default port 8080).
 
 Click on button and you will get expected result.  
 
+![Alt text](/src/test/resources/UserInterface1.jpg?raw=true "UserInterface1")
+
+![Alt text](/src/test/resources/UserInterface2.jpg?raw=true "UserInterface2")
+
 ## TESTING - 
 
 ## Unit testing -
