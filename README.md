@@ -42,7 +42,13 @@ Additionally one generic function which can be used to parse xml using xpath. It
 
 Simply Merck_TaskToSolve.docx is loaded from src/main/resources and transformed to Dom Document. The compiled xpath "/root/x1/x2[@id='a1']" (XPathExpression) evaluate Dom Document to get NodeList. The NodeList is further transformed to List of element's values using Java 8 stream api.
 
-## USER INTERFACE
+## EXCEPTION HANDLING -
+
+RestResponseEntityExceptionHandler.java - Controller advice to handle global controller level exceptions.
+
+XmlParsingServiceException.java - Customize exception handler specific to XmlParsingService.
+
+## USER INTERFACE -
 
 index.html file is available under src/main/resources/static.
 As soon as the application is up and running, it is automatically gets loaded.
@@ -70,7 +76,7 @@ For unit testing in controller Mockito is used to provide mock. Unit testing is 
 ##### Service unit test 
 ##### Utils unit tests 
 
-# POM.XML
+# POM.XML -
 
 1) Spring boot jpa, starter, tomcat, devtools etc.
 
