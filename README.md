@@ -14,8 +14,8 @@ Combination of Creational and Structural design patterns, is used to implement t
 #### src/main/java - It contains project code.
 #### src/main/resource - It contains project resources (Merck_TaskToSolve.docx which is provided), index.html page which is loaded when application is up and running.
 
-#### src/main/test - It contains unit test cases according the project structure.
-#### src/test/resources - It contains projcet test resources to perform unit test cases and evaluation of results.
+#### src/test/java - It contains unit test cases according the project structure.
+#### src/test/resources - It contains project test resources to perform unit test cases and evaluation of results.
 
 ## FUNCTIONALITIES -  
 There are two functionalities are implemented -
@@ -36,7 +36,7 @@ As xml file is already provided which is stored in src/main/resources folder str
 	}
 
 ### POST - parseXml/byXpath
-Additionally one generic function which can be used to parse xml using xpath. It take a Multipart file and xpath in request object. Please note it was not included in requirement and implemented it just for a demo purpose. 
+Additionally one generic function which can be used to parse xml using xpath. It takes a Multipart file and xpath in request object. Please note, it was not included in requirement and I implemented it just for demo purpose. 
 
 ## IMPLEMENTATION -
 
@@ -56,10 +56,13 @@ Run http://localhost:8080 (I have default port 8080).
 
 Click on button and you will get expected result.  
 
+*****************************************
+
 UserInterface1 - http://localhost:8080
 ![Alt text](/src/test/resources/UserInterface1.jpg?raw=true "UserInterface1")
 
 *****************************************
+
 UserInterface2 - http://localhost:8080/parseXml/byX2ElementXpath
 ![Alt text](/src/test/resources/UserInterface2.jpg?raw=true "UserInterface2")
 
@@ -68,10 +71,10 @@ UserInterface2 - http://localhost:8080/parseXml/byX2ElementXpath
 ## TESTING - 
 
 ## Unit testing -
-#### src/main/test
+#### src/test/java
 
 ##### Controller unit tests
-For unit testing in controller Mockito is used to provide mock. Unit testing is performed layer by layer (bottom to up) which means, once service layer unit testing is performed,  service layered is mocked, and mock service is used in controller to evaluate desired outcome.
+For unit testing in controller, Mockito is used to provide mock. Unit testing is performed layer by layer (bottom to up) which means, once service layer unit testing is performed,  service layered is mocked and mock service is used in controller to evaluate desired outcome.
 
 ##### Service unit test 
 ##### Utils unit tests 
@@ -85,8 +88,12 @@ For unit testing in controller Mockito is used to provide mock. Unit testing is 
 Maven used as a build tool.
 
 Do the following -
-a) mvn package OR mvn clean install.
+##### a) mvn package OR mvn clean install.
 It will create XmlParsingService.jar in target folder.
 
-b) java -jar XmlParsingService.jar
-Execute it using command prompt. OR a)It is a SpringBoot project and can be simply executed as a java project from XmlParsingServiceApplication.java class.
+##### b) java -jar XmlParsingService.jar
+Execute it using command prompt. 
+
+### OR
+ 
+##### a)It is a SpringBoot project and can be simply executed as a java project from XmlParsingServiceApplication.java class.
