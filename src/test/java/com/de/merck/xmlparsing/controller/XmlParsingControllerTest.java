@@ -6,8 +6,11 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+
+import io.micrometer.core.instrument.Counter;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
@@ -25,11 +28,14 @@ public class XmlParsingControllerTest {
 	
 	XmlParsingService xmlParsingService;
 	XmlParsingController xmlParsingController;
+
+	@Mock
+	Counter applicationCounter;
 	
 	@Before
     public void setUp() {
 		xmlParsingService = mock(XmlParsingService.class);
-		xmlParsingController = new XmlParsingController(xmlParsingService);
+		xmlParsingController = new XmlParsingController(xmlParsingService, applicationCounter);
     }
 
 	@Test
