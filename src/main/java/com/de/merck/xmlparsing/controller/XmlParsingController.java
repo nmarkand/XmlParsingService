@@ -1,10 +1,9 @@
 package com.de.merck.xmlparsing.controller;
-import java.util.List;
 
-
-import io.micrometer.core.annotation.Timed;
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.Metrics;
+import com.de.merck.xmlparsing.domain.XmlParsingRequest;
+import com.de.merck.xmlparsing.domain.XmlParsingResponse;
+import com.de.merck.xmlparsing.service.XmlParsingService;
+import io.prometheus.client.Counter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +12,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.de.merck.xmlparsing.domain.XmlParsingRequest;
-import com.de.merck.xmlparsing.domain.XmlParsingResponse;
-import com.de.merck.xmlparsing.service.XmlParsingService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/parseXml")
 public class XmlParsingController {
 
 	private static final Logger log = LoggerFactory.getLogger(XmlParsingController.class);
-    private Counter applicationCounter;
+    private Counter localCounter;
+    private Counter globalCounter;
     private XmlParsingService xmlParsingService;
     
     @Autowired
-    public XmlParsingController(XmlParsingService xmlParsingService, Counter applicationCounter) {
+    public XmlParsingController(XmlParsingService xmlParsingService, Counter localCounter, Counter globalCounter) {
         this.xmlParsingService = xmlParsingService;
-        this.applicationCounter = applicationCounter;
+        this.localCounter = localCounter;
+        this.globalCounter = globalCounter;
     }
 
-    @Timed
     @RequestMapping(path = "byX2ElementXpath", method = RequestMethod.GET)
     public ResponseEntity<XmlParsingResponse> parseXmlByX2ElementXpath() {
-        applicationCounter.increment();
+        // Both global and local counter increase their values here.
+        // localCounter is not available outside the scope of XmlParsingService as it is a singleton bean.
+        localCounter.inc();
+        globalCounter.inc();
         log.info("Controller parseXmlByX2ElementXpath");
         List<String> parseResponse = xmlParsingService.parseXmlByX2ElementXpath();
         log.info("Received parsing response");
@@ -45,7 +47,8 @@ public class XmlParsingController {
     
     @RequestMapping(path = "byXpath", method = RequestMethod.POST)
     public ResponseEntity<XmlParsingResponse> parseXmlByXpath(@RequestBody final XmlParsingRequest xmlParsingRequest) {
-        applicationCounter.increment();
+        localCounter.inc();
+        globalCounter.inc();
         log.info("Controller parseXmlByXpath");
         List<String> parseResponse = xmlParsingService.parseXmlByXpath(xmlParsingRequest.getFile(), xmlParsingRequest.getXpathString());
         log.info("Received parsing response");

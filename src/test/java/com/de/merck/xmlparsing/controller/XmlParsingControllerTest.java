@@ -1,13 +1,9 @@
 package com.de.merck.xmlparsing.controller;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.ArrayList;
-
-import io.micrometer.core.instrument.Counter;
+import com.de.merck.xmlparsing.domain.XmlParsingRequest;
+import com.de.merck.xmlparsing.domain.XmlParsingResponse;
+import com.de.merck.xmlparsing.service.XmlParsingService;
+import io.prometheus.client.Counter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -16,9 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.de.merck.xmlparsing.domain.XmlParsingRequest;
-import com.de.merck.xmlparsing.domain.XmlParsingResponse;
-import com.de.merck.xmlparsing.service.XmlParsingService;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class XmlParsingControllerTest {
 	
@@ -30,12 +30,15 @@ public class XmlParsingControllerTest {
 	XmlParsingController xmlParsingController;
 
 	@Mock
-	Counter applicationCounter;
-	
+	Counter localCounter;
+
+	@Mock
+	Counter globalCounter;
+
 	@Before
     public void setUp() {
 		xmlParsingService = mock(XmlParsingService.class);
-		xmlParsingController = new XmlParsingController(xmlParsingService, applicationCounter);
+		xmlParsingController = new XmlParsingController(xmlParsingService, localCounter, globalCounter);
     }
 
 	@Test

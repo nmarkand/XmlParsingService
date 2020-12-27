@@ -1,7 +1,7 @@
 package com.de.merck.xmlparsing.service;
 
-import java.util.List;
-import javax.xml.xpath.XPathExpression;
+import com.de.merck.xmlparsing.utils.ServiceUtil;
+import com.de.merck.xmlparsing.utils.XmlDocumentUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import com.de.merck.xmlparsing.utils.ServiceUtil;
-import com.de.merck.xmlparsing.utils.XmlDocumentUtil;
+
+import javax.xml.xpath.XPathExpression;
+import java.util.List;
 
 @Service
 public class XmlParsingService {
@@ -44,7 +45,7 @@ public class XmlParsingService {
 	/**
 	 * 
 	 * @param file
-	 * @param xpathString
+	 * @param xpath
 	 * @return List<String> xml elements values
 	 */
 	public List<String> parseXmlByXpath(MultipartFile file, String xpath) {
